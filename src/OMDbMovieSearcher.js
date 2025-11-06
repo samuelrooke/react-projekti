@@ -4,31 +4,22 @@ export default function OMDbMovieSearcher() {
   const [text, setText] = useState("moro");
 
   return (
-    
     <div>
       <p>{text}</p>
-      <form onSubmit={e => {
-        
-        (async () => {
+      <form
+        onSubmit={(e) => {
           e.preventDefault();
-
-          const rawResponse = await fetch(
-          "http://www.omdbapi.com/?t=" + e.target[0].value + "&apikey=980ebb83",
-            {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ a: 1, b: "Textual content" }),
-            },
-          );
-          const content = await rawResponse.json();
-
-          setText(JSON.stringify(content));
-        })();
-      }}>
-        <input />
+          (async () => {
+            const movieTitle = e.target[0].value;
+            const response = await fetch(
+              `https://www.omdbapi.com/?t=${encodeURIComponent(movieTitle)}&apikey=980ebb83`
+            );
+            const data = await response.json();
+            setText(JSON.stringify(data, null, 2));
+          })();
+        }}
+      >
+        <input placeholder="input" />
       </form>
     </div>
   );
