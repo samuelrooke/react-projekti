@@ -12,7 +12,7 @@ export default function OMDbMovieSearcher() {
           (async () => {
             const movieTitle = e.target[0].value;
             const response = await fetch(
-              `https://www.omdbapi.com/?t=${encodeURIComponent(movieTitle)}&apikey=980ebb83`
+              `https://www.omdbapi.com/?s=${encodeURIComponent(movieTitle)}&apikey=980ebb83`
             );
             const data = await response.json();
             setText(JSON.stringify(data, null, 2));
