@@ -16,6 +16,7 @@ export default function OMDbMovieSearcher() {
             );
             const data = await response.json();
             setText(JSON.stringify(data, null, 2));
+            
           })();
         }}
       >
